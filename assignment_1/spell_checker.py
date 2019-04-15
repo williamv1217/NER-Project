@@ -33,38 +33,38 @@ def spell_checker():
         if w.lower() not in my_dict:
             misspelled_words.add(w.lower())
 
-    inp = int(input('Press 1 to enter your own word and use difflib.'
-                    '\nPress 2 to enter your own word and use levenstein distance.'
-                    '\nPress 3 to output list of misspelled words in Moby Dick.'
-                    '\nPress 4 to output spellings of all misspelled words in Moby Dick.\n'))
 
     while True:
+        inp = int(input('\nPress 1 to enter your own word and use difflib.'
+                        '\nPress 2 to enter your own word and use levenstein distance.'
+                        '\nPress 3 to output list of misspelled words in Moby Dick.'
+                        '\nPress 4 to output spellings of all misspelled words in Moby Dick.\n'))
         if inp == 1:
             inp_word = input('enter your input word: \n')
+            print('working.....')
             print(f'{inp_word}:\t{gcm(inp_word, my_dict)}')
         if inp == 2:
             inp_word = input('enter your input word: \n')
-            the_count = 0
-            counter = 20
+            count = 0
+            lev_dist = 20
             total_list = []
             print('working...', end='')
             for word in my_dict:
                 now = lev(inp_word, word)
-                if counter >= now:
-                    the_count += 1
-                    counter = now
+                if lev_dist >= now:
+                    count += 1
+                    lev_dist = now
                     total_list.append(word)
-                    if the_count % 2 == 0:
+                    if count % 2 == 0:
                         print('.', end='')
             print()
             print(total_list[-3:])
         if inp == 3:
+            print(f'Total misspelled words: {len(misspelled_words)}')
             print(misspelled_words)
-            break
         if inp == 4:
             for w in misspelled_words:
                 print(f'{w}:\t{gcm(w, my_dict)}')
-            break
 
 
 # took inspiration from the levenstein code online in wikipedia
